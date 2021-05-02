@@ -6,10 +6,25 @@
     </div>
             
     <div class="container">
-        <div class="row" >
-            {% for project in projects %}
-            {{ project.name }}
-            {% endfor %}
+        <div class="row" >         
+            <div class="table-responsive">      
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Projeto</th>
+                        <th scope="col">Descricao</th>
+                    </tr>
+                    </thead>                 
+                    <tbody>
+                    {% for project in projects %} 
+                    <tr>
+                        <td>{{ project.name }}</td>
+                        <td>{{ project.description }}</td>
+                    </tr>                
+                    {% endfor %}
+                    </tbody>
+                </table> 
+            </div>
         </div>
     </div>  
 {% endblock %}
