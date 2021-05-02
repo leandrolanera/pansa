@@ -90,7 +90,7 @@ DATABASES = {
     },
 }
 
-DATABASE_ROUTERS = ['pansa.routers.RedmineRouter.RedmineRouter']
+DATABASE_ROUTERS = ['pansa.routers.GerenteRouter.GerenteRouter']
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
