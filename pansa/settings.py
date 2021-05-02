@@ -79,9 +79,18 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    },
+    'redminedb': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'redmine',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '3306',
+    },
 }
 
+DATABASE_ROUTERS = ['pansa.routers.RedmineRouter.RedmineRouter']
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
