@@ -87,10 +87,15 @@ DATABASES = {
         'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '3306',
+        'OPTIONS': {
+            'sql_mode': 'traditional',
+        }
     },
 }
 
-DATABASE_ROUTERS = ['pansa.routers.GerenteRouter.GerenteRouter']
+DATABASE_ROUTERS = ['pansa.routers.AtendimentoRouter.AtendimentoRouter',
+                    'pansa.routers.GerenteRouter.GerenteRouter',
+                    ]
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
