@@ -1,0 +1,56 @@
+.container-fluid {
+    padding: auto;
+}
+
+.container-fluid .row {
+    margin: 0;
+}
+
+
+h1, h2, h3, h4 {
+    font-family: Fantasy, Sans-serif;
+    margin: auto;
+}
+
+
+
+/* Navbar */
+
+.navbar  {
+    border-bottom: 1px solid rgb(0, 0, 0);
+    margin-bottom: 20px;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 20pt;
+}
+
+.navbar-light .navbar-nav a.nav-link {
+    color: #333;
+    letter-spacing: 1px;
+}
+
+/* Titulos */
+.titulo {
+    color: #2c2c2c;
+    margin-top: 50px;
+    text-align: center;
+}
+
+
+
+
+/* Rodapé */
+footer {
+    background-color: #cac9c9;
+    height: 50px;
+    border-top: 2px solid #141414;
+}
+
+footer p {
+    color: #000000;
+    text-align: center;
+    top: 20%;
+    position: relative;
+}
