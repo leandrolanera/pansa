@@ -47,7 +47,7 @@ def detalhe_projeto(request, id):
         cursor.execute(sql)
         ProjetoPrinc = dictfetchall(cursor)
 
-    sql = " select distinct C.name as versao,"
+    sql = " select distinct C.name as versao,C.id,"
     sql = sql + " (A.name) as nome,"
     sql = sql + " count(B.id) as demandas,"
     sql = sql + " count(IF(B.closed_on is null,1,null)) as demabertas,"
@@ -64,3 +64,31 @@ def detalhe_projeto(request, id):
         DetProjeto = dictfetchall(cursor)
 
     return render(request, 'detalhes-projeto.html',{'detalhesProjeto':DetProjeto, 'projetoPrinc':ProjetoPrinc})
+
+def lista_baseline(request, nomeVersao):
+    
+    # sql = "select A.name "
+    # sql = sql + " from redmine.projects A where id = % s" % idProjeto
+    
+    # with connections['redminedb'].cursor() as cursor:
+    #     cursor.execute(sql)
+    #     ProjetoPrinc = dictfetchall(cursor)
+
+    sql = "select distinct A.name as nome, "
+    sql = sql + " case when (position(',' in GROUP_CONCAT(distinct C.name ORDER BY INET_ATON(SUBSTRING_INDEX(CONCAT(C.name,'.0.0.0'),'.',4)) DESC))) > 0 then "
+    sql = sql + " 	SUBSTR(GROUP_CONCAT(distinct C.name ORDER BY INET_ATON(SUBSTRING_INDEX(CONCAT(C.name,'.0.0.0'),'.',4)) DESC),1,position(',' in GROUP_CONCAT(distinct C.name ORDER BY INET_ATON(SUBSTRING_INDEX(CONCAT(C.name,'.0.0.0'),'.',4)) DESC))-1) "
+    sql = sql + " else GROUP_CONCAT(distinct C.name ORDER BY INET_ATON(SUBSTRING_INDEX(CONCAT(C.name,'.0.0.0'),'.',4)) DESC) "
+    sql = sql + " end as versao "
+    sql = sql + " from redmine.projects A "
+    sql = sql + " inner join redmine.issues B ON (A.id = B.project_id) "
+    sql = sql + " inner join redmine.versions C ON (B.fixed_version_id = C.id) "
+    sql = sql + " where INET_ATON(SUBSTRING_INDEX(CONCAT(C.name,'.0.0.0'),'.',4)) <= INET_ATON(SUBSTRING_INDEX(CONCAT('% s','.0.0.0'),'.',4)) " % nomeVersao
+    sql = sql + " and A.parent_id = 166"
+    sql = sql + " group by A.name "
+
+    with connections['redminedb'].cursor() as cursor:
+        cursor.execute(sql)
+        baseline = dictfetchall(cursor)
+
+    return render(request, 'lista-baseline.html',{'baseline':baseline})
+

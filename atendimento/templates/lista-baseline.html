@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}  
+<div class="container">
+    <div class="row" >         
+        <div class="table-responsive">      
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Projeto</th>
+                    <th scope="col">Versão</th>
+                </tr>
+                </thead>                 
+                <tbody>
+                {% for base in baseline %} 
+                <tr>
+                    <td>{{ base.nome }}</td>
+                    <td>{{ base.versao }}</td>
+                </tr>                
+                {% endfor %}
+                </tbody>
+            </table> 
+        </div>
+    </div>
+</div>  
+{% endblock %}

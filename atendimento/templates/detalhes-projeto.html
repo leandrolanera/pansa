@@ -17,7 +17,8 @@
                 <tr>
                     <th scope="col">Versão</th>
                     <th scope="col">Status</th>
-                    <th scope="col">Demandas</th>                                       
+                    <th scope="col">Demandas</th>  
+                    <th scope="col">Ação</th>                                     
                 </tr>
                 </thead>                 
                 <tbody>
@@ -35,7 +36,12 @@
                         ({{ projeto.demabertas }} Abertas)
                         {% endif %} 
                     </td>
-                </tr>                
+                    <td> {% if projeto.temaceite == 1 %}
+                        <a class="btn btn-primary" href="{% url 'lista_baseline' projeto.versao %}" role="button">Baseline</a>
+                        {% endif %}                         
+                    </td>
+                </tr>  
+                              
                 {% endfor %}
                 </tbody>
             </table> 
