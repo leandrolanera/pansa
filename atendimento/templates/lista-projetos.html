@@ -1,39 +1,37 @@
 {% extends 'base.html' %}
 
-
-
 {% block content %}
-    <div class="titulo">
-        <h1>Lista de Projetos </h1>
-    </div>
-            
-    <div class="container">
-        <div class="row" >         
-            <div class="table-responsive">      
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th scope="col">Projeto</th>
-                        <th scope="col">Versão</th>
-                        <th scope="col">Qtd Demandas</th>
-                        <th scope="col">Ação</th>
-                    </tr>
-                    </thead>                 
-                    <tbody>
-                    {% for project in projects %} 
-                    <tr>
-                        <td>{{ project.projeto }}</td>
-                        <td>{{ project.ultimaversao }}</td>
-                        <td>{{ project.demandas }}</td>
-                        <td>
-                            <a class="btn btn-primary" href="/atendimento" role="button">Detalhes</a>
-                        </td>
-                    </tr>                
-                    {% endfor %}
-                    </tbody>
-                </table> 
-            </div>
+<div class="titulo">
+    <h1>Lista de Projetos </h1>
+</div>
+        
+<div class="container">
+    <div class="row" >         
+        <div class="table-responsive">      
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Projeto</th>
+                    <th scope="col">Versão</th>
+                    <th scope="col">Qtd Demandas</th>
+                    <th scope="col">Ação</th>
+                </tr>
+                </thead>                 
+                <tbody>
+                {% for project in projects %} 
+                <tr>
+                    <td>{{ project.projeto }}</td>
+                    <td>{{ project.ultimaversao }}</td>
+                    <td>{{ project.demandas }}</td>
+                    <td>
+                        <a class="btn btn-primary" href="{% url 'detalhe_projeto' project.id %}" role="button">Detalhes</a>
+                    </td>
+                </tr>                
+                {% endfor %}
+                </tbody>
+            </table> 
         </div>
-    </div>  
+    </div>
+</div>  
 {% endblock %}
 

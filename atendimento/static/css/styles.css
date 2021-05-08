@@ -12,7 +12,10 @@ h1, h2, h3, h4 {
     margin: auto;
 }
 
-
+th, td{
+    font-size: 15pt;
+    margin: auto;
+}
 
 /* Navbar */
 
@@ -35,6 +38,7 @@ h1, h2, h3, h4 {
 .titulo {
     color: #2c2c2c;
     margin-top: 50px;
+    margin-bottom: 50px;
     text-align: center;
 }
 

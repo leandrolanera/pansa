@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="titulo">
+    {% for projeto in projetoPrinc %} 
+    <h1>{{projeto.name}} </h1>
+    <p>Ultima versão desbetada: {{projeto.ultimaversao}} </p>
+    {% endfor %}
+</div>
+
+<div class="container">
+    <div class="row" >         
+        <div class="table-responsive">      
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Versão</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Demandas</th>                                       
+                </tr>
+                </thead>                 
+                <tbody>
+                {% for projeto in detalhesProjeto %} 
+                <tr>
+                    <td>{{ projeto.versao }}</td>                    
+                    <td> {% if projeto.temaceite == 1 %}
+                            Finalizada
+                        {% else %}
+                            Aberta
+                        {% endif %} 
+                    </td>
+                    <td>{{ projeto.demandas }} 
+                        {% if projeto.demabertas > 0 %}
+                        ({{ projeto.demabertas }} Abertas)
+                        {% endif %} 
+                    </td>
+                </tr>                
+                {% endfor %}
+                </tbody>
+            </table> 
+        </div>
+    </div>
+</div> 
+{% endblock %}
