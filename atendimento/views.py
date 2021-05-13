@@ -57,7 +57,7 @@ def detalhe_projeto(request, id):
     sql = sql + " inner join redmine.versions C ON (B.fixed_version_id = C.id)"
     sql = sql + " where A.id = % s" % id
     sql = sql + " group by C.name"
-    sql = sql + " order by  C.name desc"
+    sql = sql + " order by  INET_ATON(SUBSTRING_INDEX(CONCAT(C.name,'.0.0.0'),'.',4)) desc"
 
     with connections['redminedb'].cursor() as cursor:
         cursor.execute(sql)

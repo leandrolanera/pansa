@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="titulo">
-    <h1>Lista de Projetos </h1>
+    <h1>Lista de Sistemas </h1>
 </div>
         
 <div class="container">
@@ -12,9 +12,8 @@
                 <thead>
                 <tr>
                     <th scope="col">Projeto</th>
-                    <th scope="col">Versão</th>
-                    <th scope="col">Qtd Demandas</th>
-                    <th scope="col">Ação</th>
+                    <th scope="col">Versão Fechada</th>
+                    <th scope="col"></th>
                 </tr>
                 </thead>                 
                 <tbody>
@@ -22,9 +21,8 @@
                 <tr>
                     <td>{{ project.projeto }}</td>
                     <td>{{ project.ultimaversao }}</td>
-                    <td>{{ project.demandas }}</td>
                     <td>
-                        <a class="btn btn-primary" href="{% url 'detalhe_projeto' project.id %}" role="button">Detalhes</a>
+                        <a class="btn btn-info" href="{% url 'detalhe_projeto' project.id %}" role="button">Detalhes</a>
                     </td>
                 </tr>                
                 {% endfor %}
