@@ -23,6 +23,7 @@
                     <td>{{ project.ultimaversao }}</td>
                     <td>
                         <a class="btn btn-info" href="{% url 'detalhe_projeto' project.id %}" role="button">Detalhes</a>
+                        <a class="btn btn-danger" href="http://redmine.pandora.com.br/projects/{{ project.identificador }}" target="_blank" role="button">Redmine</a>
                     </td>
                 </tr>                
                 {% endfor %}

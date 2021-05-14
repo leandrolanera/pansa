@@ -2,29 +2,37 @@
 
 {% block content %}
 
-<div class="titulo">
-    {% for projeto in projetoPrinc %} 
-    <h1>{{projeto.name}} </h1>
-    <p>Ultima versão desbetada: {{projeto.ultimaversao}} </p>
-    {% endfor %}
-</div>
 
 <div class="container">
+    <ul class="nav nav-pills">
+        <li class="nav-item pill-1">
+            <a class="nav-link active" href="/atendimento/projetos"><i>Home (Projetos)</i></a>
+        </li>
+    </ul>
+    <div class="subtitulo">
+        {% for projeto in projetoPrinc %} 
+        <h1>{{projeto.name}} </h1>
+        <p>Ultima versão desbetada: {{projeto.ultimaversao}} </p>
+        {% endfor %}
+    </div>
     <div class="row" >         
         <div class="table-responsive">      
             <table class="table">
                 <thead>
                 <tr>
                     <th scope="col">Versão</th>
+                    <th scope="col">Descrição</th>
                     <th scope="col">Status</th>
                     <th scope="col">Demandas</th>  
-                    <th scope="col"></th>                                     
+                    <th scope="col"></th>      
+                    <th scope="col"></th>                                 
                 </tr>
                 </thead>                 
                 <tbody>
                 {% for projeto in detalhesProjeto %} 
                 <tr>
-                    <td>{{ projeto.versao }}</td>                    
+                    <td>{{ projeto.versao }}</td>     
+                    <td>{{ projeto.descVersao }}</td>                 
                     <td> {% if projeto.temaceite == 1 %}
                             Finalizada
                         {% else %}
@@ -33,12 +41,15 @@
                     </td>
                     <td>{{ projeto.demandas }} 
                         {% if projeto.demabertas > 0 %}
-                        - {{ projeto.demabertas }} Aberta(s)
+                        ({{ projeto.demabertas }} Abertas)
                         {% endif %} 
                     </td>
                     <td> {% if projeto.temaceite == 1 %}
-                        <a class="btn btn-info" href="{% url 'lista_baseline' projeto.versao %}" role="button">Baseline</a>
+                        <a class="btn btn-info" href="{% url 'lista_baseline' projeto.versao %}" role="button">Baseline</a>                        
                         {% endif %}                         
+                    </td>
+                    <td>                       
+                        <a class="btn btn-danger" href="http://redmine.pandora.com.br/projects/sas-desenvolvimento/issues?fixed_version_id={{ projeto.idVersao }}&set_filter=1&status_id=*" target="_blank" role="button">Redmine</a>
                     </td>
                 </tr>  
                               

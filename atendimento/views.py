@@ -17,7 +17,7 @@ def dictfetchall(cursor):
     ]
 
 def lista_projetos(request):
-    sql = "select distinct A.id, (A.name) as projeto," 
+    sql = "select distinct A.id, (A.name) as projeto,identifier as identificador," 
     sql = sql +  " count(B.id) as demandas,"
     sql = sql +  " (select max(CC.name) from redmine.issues BB inner join redmine.versions CC ON (BB.fixed_version_id = CC.id) "
     sql = sql +  " where BB.project_id = A.id and BB.tracker_id = 23) as ultimaversao"
@@ -47,7 +47,7 @@ def detalhe_projeto(request, id):
         cursor.execute(sql)
         ProjetoPrinc = dictfetchall(cursor)
 
-    sql = " select distinct C.name as versao,C.id,"
+    sql = " select distinct C.name as versao,C.id as idVersao,C.description as descVersao,"
     sql = sql + " (A.name) as nome,"
     sql = sql + " count(B.id) as demandas,"
     sql = sql + " count(IF(B.closed_on is null,1,null)) as demabertas,"
@@ -90,5 +90,5 @@ def lista_baseline(request, nomeVersao):
         cursor.execute(sql)
         baseline = dictfetchall(cursor)
 
-    return render(request, 'lista-baseline.html',{'baseline':baseline})
+    return render(request, 'lista-baseline.html',{'baseline':baseline, 'nomeVersao':nomeVersao})
 
