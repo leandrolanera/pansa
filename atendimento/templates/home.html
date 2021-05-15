@@ -1,1 +1,8 @@
-Olá
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="center">
+    <a class="botaoprinc botaoprinc1" href="{% url 'lista_projetos' %}" role="button">Sistemas</a>                        
+    <a class="botaoprinc botaoprinc1" href="{% url 'lista_versoes' %}" role="button">Versões</a>  
+</div>
+{% endblock %}
