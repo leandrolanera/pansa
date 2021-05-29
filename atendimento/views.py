@@ -30,11 +30,14 @@ def lista_projetos(request):
     sql = sql +  " group by A.name"
     sql = sql +  " order by A.name"
 
-    with connections['redminedb'].cursor() as cursor:
-        cursor.execute(sql)
-        SasProjetos = dictfetchall(cursor)
+    try:
+        with connections['redminedb'].cursor() as cursor:
+            cursor.execute(sql)
+            SasProjetos = dictfetchall(cursor)
+        return render(request, 'lista-projetos.html',{'projects':SasProjetos})
+    except:
+       return render(request, 'erro.html') 
     
-    return render(request, 'lista-projetos.html',{'projects':SasProjetos})
 
 def detalhe_projeto(request, id):
     
@@ -43,9 +46,12 @@ def detalhe_projeto(request, id):
     sql = sql + "             where BB.project_id = A.id and BB.tracker_id = 23) as ultimaversao "
     sql = sql + " from redmine.projects A where id = % s" % id
     
-    with connections['redminedb'].cursor() as cursor:
-        cursor.execute(sql)
-        ProjetoPrinc = dictfetchall(cursor)
+    try:
+        with connections['redminedb'].cursor() as cursor:
+            cursor.execute(sql)
+            ProjetoPrinc = dictfetchall(cursor)
+    except:
+       return render(request, 'erro.html') 
 
     sql = " select distinct C.name as versao,C.id as idVersao,C.description as descVersao,"
     sql = sql + " (A.name) as nome,A.identifier as identificador,"
@@ -59,11 +65,14 @@ def detalhe_projeto(request, id):
     sql = sql + " group by C.name"
     sql = sql + " order by  INET_ATON(SUBSTRING_INDEX(CONCAT(C.name,'.0.0.0'),'.',4)) desc"
 
-    with connections['redminedb'].cursor() as cursor:
-        cursor.execute(sql)
-        DetProjeto = dictfetchall(cursor)
-
-    return render(request, 'detalhes-projeto.html',{'detalhesProjeto':DetProjeto, 'projetoPrinc':ProjetoPrinc})
+    try:
+        with connections['redminedb'].cursor() as cursor:
+            cursor.execute(sql)
+            DetProjeto = dictfetchall(cursor)
+        return render(request, 'detalhes-projeto.html',{'detalhesProjeto':DetProjeto, 'projetoPrinc':ProjetoPrinc})
+    except:
+       return render(request, 'erro.html') 
+    
 
 def lista_baseline(request, nomeVersao):
     
@@ -86,12 +95,14 @@ def lista_baseline(request, nomeVersao):
     sql = sql + " and A.parent_id = 166"
     sql = sql + " group by A.name "
 
-    with connections['redminedb'].cursor() as cursor:
-        cursor.execute(sql)
-        baseline = dictfetchall(cursor)
-
-    return render(request, 'lista-baseline.html',{'baseline':baseline, 'nomeVersao':nomeVersao})
-
+    try:
+        with connections['redminedb'].cursor() as cursor:
+            cursor.execute(sql)
+            baseline = dictfetchall(cursor)
+        return render(request, 'lista-baseline.html',{'baseline':baseline, 'nomeVersao':nomeVersao})
+    except:
+       return render(request, 'erro.html') 
+    
 def lista_versoes(request):
     sql = "select distinct  C.name, C.description,C.id," 
     sql = sql + " count(distinct A.id) as sistemas" 
@@ -102,8 +113,11 @@ def lista_versoes(request):
     sql = sql + " group by C.name" 
     sql = sql + " order by INET_ATON(SUBSTRING_INDEX(CONCAT(C.name,'.0.0.0'),'.',4)) desc"
 
-    with connections['redminedb'].cursor() as cursor:
-        cursor.execute(sql)
-        SasVersoes = dictfetchall(cursor)
-    
-    return render(request, 'lista-versoes.html',{'versoes':SasVersoes})
+    try:
+        with connections['redminedb'].cursor() as cursor:
+            cursor.execute(sql)
+            SasVersoes = dictfetchall(cursor)
+        return render(request, 'lista-versoes.html',{'versoes':SasVersoes})
+    except:
+       return render(request, 'erro.html') 
+        

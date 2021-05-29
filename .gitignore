@@ -1,8 +1,0 @@
-env
-.vscode
-db.sqlite3
-uploads/*
-downloads/*
-__pycache__
-.env
-static
