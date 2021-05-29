@@ -80,12 +80,22 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     },
+    # 'redminedb': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'redmine',
+    #     'USER': 'root',
+    #     'PASSWORD': '',
+    #     'HOST': 'localhost', 
+    #     'PORT': '3306',
+    #     'OPTIONS': {
+    #         'sql_mode': 'traditional',
+    #     },
     'redminedb': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'redmine',
         'USER': 'root',
-        'PASSWORD': '',
-        'HOST': 'localhost',
+        'PASSWORD': 'lentedeaumento',
+        'HOST': 'cloud-sql1.completo.com.br', 
         'PORT': '3306',
         'OPTIONS': {
             'sql_mode': 'traditional',

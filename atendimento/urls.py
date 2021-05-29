@@ -3,6 +3,7 @@ from .views import home, lista_projetos, detalhe_projeto, lista_baseline, lista_
 
 urlpatterns = [
     path('home', home, name='home'),
+    path('home', home, name='home'),
     path('projetos', lista_projetos, name='lista_projetos'),
     path('versoes', lista_versoes, name='lista_versoes'),
     path('detalhes/<int:id>/', detalhe_projeto, name='detalhe_projeto'),
